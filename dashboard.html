@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Hunter - Analyse exploratoire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f5f9;
+            color: #222;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #1f4e8c;
+        }
+        .intro {
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            text-align: center;
+        }
+        .chiffres {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .chiffre {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px 25px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .chiffre strong {
+            display: block;
+            font-size: 24px;
+            color: #1f4e8c;
+        }
+        .grille {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .carte {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .carte h2 {
+            font-size: 18px;
+            color: #1f4e8c;
+            margin-top: 0;
+        }
+        .carte img {
+            width: 100%;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+        @media (max-width: 500px) {
+            .grille {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Apartment Hunter - Analyse exploratoire</h1>
+
+    <p class="intro">
+        Ventes de maisons du comté de King (région de Seattle) entre mai 2014 et mai 2015.<br>
+        Ce tableau de bord remplace le dashboard Power BI demandé dans le sujet (Power BI n'était pas disponible) :
+        les graphiques ont été faits en Python dans le notebook <code>apartment_hunter.ipynb</code>.
+    </p>
+
+    <div class="chiffres">
+        <div class="chiffre"><strong>21 596</strong>maisons après nettoyage</div>
+        <div class="chiffre"><strong>450 000 $</strong>prix médian</div>
+        <div class="chiffre"><strong>93,1 %</strong>des maisons sous 1 M$</div>
+        <div class="chiffre"><strong>0,70</strong>corrélation surface / prix</div>
+    </div>
+
+    <div class="grille">
+        <div class="carte">
+            <h2>1. Distribution des prix</h2>
+            <img src="images/1_distribution_prix.png" alt="Distribution des prix">
+            <p>La plupart des maisons coûtent moins de 1 million $. Quelques maisons très chères étirent la distribution vers la droite (jusqu'à 7,7 M$).</p>
+        </div>
+
+        <div class="carte">
+            <h2>2. Surface habitable et prix</h2>
+            <img src="images/2_surface_prix.png" alt="Surface et prix">
+            <p>Le prix augmente globalement avec la surface (corrélation de 0,70). Les grandes maisons ont des prix plus dispersés.</p>
+        </div>
+
+        <div class="carte">
+            <h2>3. Qualité de construction</h2>
+            <img src="images/3_grade_prix.png" alt="Grade et prix">
+            <p>Le prix médian augmente globalement avec la qualité de construction : 0,38 M$ pour le grade 7 (moyen), 2,98 M$ pour le grade 13. En bas de l'échelle, le grade 3 dépasse le grade 4, mais ces groupes ne comptent que 1 et 27 maisons.</p>
+        </div>
+
+        <div class="carte">
+            <h2>4. Nombre de chambres</h2>
+            <img src="images/4_chambres_prix.png" alt="Chambres et prix">
+            <p>La tendance monte globalement jusqu'à environ 7 chambres. Au-delà, il y a très peu de maisons (13, 6, 3 et 1) : on ne peut pas en tirer une tendance fiable.</p>
+        </div>
+
+        <div class="carte">
+            <h2>5. Qualité de la vue</h2>
+            <img src="images/5_vue_prix.png" alt="Vue et prix">
+            <p>Prix médian de 0,43 M$ sans vue contre 1,18 M$ avec une vue excellente. Avec vue sur l'eau : 1,4 M$ contre 450 000 $.</p>
+        </div>
+
+        <div class="carte">
+            <h2>6. Emplacement</h2>
+            <img src="images/6_carte_prix.png" alt="Carte des prix">
+            <p>Des zones sont nettement plus chères (en rouge) que d'autres, alors que la corrélation de la longitude avec le prix est presque nulle (0,02) : la localisation compte, mais pas « en ligne droite ».</p>
+        </div>
+
+        <div class="carte">
+            <h2>7. Corrélations</h2>
+            <img src="images/7_correlations.png" alt="Matrice de corrélation">
+            <p>Les variables les plus liées au prix sont la surface (0,70), le grade (0,67) et la surface des voisins (0,59). La surface est aussi très liée au nombre de salles de bain et au grade (0,76).</p>
+        </div>
+
+        <div class="carte">
+            <h2>8. Résultat des modèles</h2>
+            <img src="images/8_comparaison_modeles.png" alt="Comparaison des modèles">
+            <p>Erreur moyenne en validation croisée sur le train : la forêt aléatoire optimisée par Grid Search est la meilleure (73 764 $), juste devant la forêt par défaut (74 266 $). Évaluation finale sur le jeu de test, faite une seule fois : R² de 0,877 et erreur moyenne de 71 718 $.</p>
+        </div>
+    </div>
+
+    <footer>Projet Apartment Hunter - Chasseurs d'appart'</footer>
+
+</body>
+</html>

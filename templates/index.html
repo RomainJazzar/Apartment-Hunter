@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Hunter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="carte">
+        <h1>Apartment Hunter</h1>
+        <p class="sous-titre">Estimez le prix d'une maison du comté de King (région de Seattle)</p>
+
+        <form method="POST">
+            <div class="grille">
+                <div class="champ">
+                    <label for="sqft_living">Surface habitable (pieds²)</label>
+                    <input type="number" id="sqft_living" name="sqft_living" min="200" max="15000" placeholder="Exemple : 1800" value="{{ valeurs.get('sqft_living', '') }}" required>
+                    <small>1 m² ≈ 10,76 pieds²</small>
+                </div>
+
+                <div class="champ">
+                    <label for="sqft_lot">Surface du terrain (pieds²)</label>
+                    <input type="number" id="sqft_lot" name="sqft_lot" min="500" max="2000000" placeholder="Exemple : 7500" value="{{ valeurs.get('sqft_lot', '') }}" required>
+                </div>
+
+                <div class="champ">
+                    <label for="bedrooms">Nombre de chambres</label>
+                    <input type="number" id="bedrooms" name="bedrooms" min="1" max="15" placeholder="Exemple : 3" value="{{ valeurs.get('bedrooms', '') }}" required>
+                </div>
+
+                <div class="champ">
+                    <label for="grade">Qualité de construction (1 à 13)</label>
+                    <input type="number" id="grade" name="grade" min="1" max="13" placeholder="Exemple : 7" value="{{ valeurs.get('grade', '') }}" required>
+                    <small>7 = qualité moyenne, 11 à 13 = haut de gamme</small>
+                </div>
+
+                <div class="champ">
+                    <label for="waterfront">Vue sur l'eau</label>
+                    <select id="waterfront" name="waterfront">
+                        <option value="0">Non</option>
+                        <option value="1" {% if valeurs.get('waterfront') == '1' %}selected{% endif %}>Oui</option>
+                    </select>
+                </div>
+
+                <div class="champ">
+                    <label for="yr_renovated">Année de rénovation</label>
+                    <input type="number" id="yr_renovated" name="yr_renovated" min="0" max="2015" placeholder="Exemple : 0" value="{{ valeurs.get('yr_renovated', '') }}" required>
+                    <small>Mettre 0 si la maison n'a jamais été rénovée</small>
+                </div>
+
+                <div class="champ">
+                    <label for="lat">Latitude</label>
+                    <input type="number" id="lat" name="lat" step="any" min="47.15" max="47.78" placeholder="Exemple : 47.5112" value="{{ valeurs.get('lat', '') }}" required>
+                </div>
+
+                <div class="champ">
+                    <label for="long">Longitude</label>
+                    <input type="number" id="long" name="long" step="any" min="-122.52" max="-121.31" placeholder="Exemple : -122.257" value="{{ valeurs.get('long', '') }}" required>
+                </div>
+            </div>
+
+            <p class="aide">Les coordonnées permettent au modèle de prendre en compte la localisation du logement.</p>
+
+            <button type="submit">Estimer</button>
+        </form>
+
+        {% if prix %}
+        <div class="resultat">
+            Prix estimé
+            <strong>{{ prix }} $</strong>
+        </div>
+        {% endif %}
+
+        <p class="note">Estimation faite par une forêt aléatoire entraînée sur des ventes de 2014-2015.</p>
+    </div>
+</body>
+</html>
