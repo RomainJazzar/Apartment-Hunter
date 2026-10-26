@@ -53,26 +53,30 @@ On avait le choix entre deux jeux de données (Madrid et King County). On a choi
 
 ### Feuille de route
 
-| # | Tâche | Durée estimée |
-|---|---|---|
-| 1 | Lecture du sujet, choix du jeu de données, création du GitHub et du Trello | 0,5 jour |
-| 2 | Compréhension des données | 0,5 jour |
-| 3 | Nettoyage des données | 0,5 jour |
-| 4 | Analyse exploratoire (graphiques + dashboard) | 0,5 jour |
-| 5 | Sélection des variables | 0,5 jour |
-| 6 | Entraînement et comparaison des 3 modèles | 1 jour |
-| 7 | Grid Search et choix du modèle final | 0,5 jour |
-| 8 | Application Flask | 1 jour |
-| 9 | Docker | 0,5 jour |
-| 10 | README, documentation et veille | 0,5 jour |
-| 11 | Préparation de la présentation | 0,5 jour |
-| | **Total** | **6,5 jours** |
+| # | Tâche | Durée estimée | Responsable |
+|---|---|---|---|
+| 1 | Lecture du sujet, choix du jeu de données, création du GitHub et du Trello | 0,5 jour | Équipe |
+| 2 | Compréhension des données | 0,5 jour | Équipe |
+| 3 | Nettoyage des données | 0,5 jour | Romain |
+| 4 | Analyse exploratoire (graphiques + dashboard) | 0,5 jour | Romain |
+| 5 | Sélection des variables | 0,5 jour | Yannis |
+| 6 | Entraînement et comparaison des 3 modèles | 1 jour | Yannis |
+| 7 | Grid Search et choix du modèle final | 0,5 jour | Lisa |
+| 8 | Application Flask | 1 jour | Lisa |
+| 9 | Docker | 0,5 jour | Lisa |
+| 10 | README, documentation et veille | 0,5 jour | Équipe |
+| 11 | Préparation de la présentation | 0,5 jour | Équipe |
+| | **Total** | **6,5 jours** | |
 
 ### Ressources
 
-- **Humaines** : 1 personne, qui s'occupe de toutes les étapes (données, modèles, application, documentation).
+- **Humaines** : 3 personnes.
+  - **Romain** : données, nettoyage, analyse exploratoire et logique globale du projet
+  - **Yannis** : sélection des variables, modèles et métriques
+  - **Lisa** : Grid Search, modèle final, application Flask et Docker
+  - En équipe : mise en place, compréhension des données, documentation et présentation
 - **Matérielles** :
-  - un ordinateur portable classique (pas besoin de GPU : les modèles s'entraînent en quelques minutes)
+  - nos ordinateurs portables (pas besoin de GPU : les modèles s'entraînent en quelques minutes)
   - Google Colab (gratuit) pour le notebook
   - GitHub pour le code
   - Trello pour le suivi des tâches
